@@ -11,6 +11,12 @@ public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());
 
+
+    /**
+     * 根据用户名查询
+     * @param username
+     * @return
+     */
     @Override
     public User findByUsername(String username) {
         User user = null;
@@ -69,5 +75,26 @@ public class UserDaoImpl implements UserDao {
         String sql = "update tab_user set status = 'Y' where uid = ?";
         jdbcTemplate.update(sql, user.getUid());
 
+    }
+
+
+    /**
+     * 根据用户名和密码查询用户
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public User findByUsernameAndByPassword(String username, String password) {
+        User user = null;
+        try {
+            //定义sql
+            String sql = "select * from tab_user where username = ? and password = ?";
+            //执行sql
+            user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username,password);
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+        return user;
     }
 }

@@ -4,6 +4,7 @@ import cn.itcast.travel.domain.ResultInfo;
 import cn.itcast.travel.domain.User;
 import cn.itcast.travel.service.UserService;
 import cn.itcast.travel.service.impl.UserServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         //2.封装user对象
         User user = new User();
         try {
-            BeanUtils.populate(user,map);
+            BeanUtils.populate(user, map);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -51,6 +52,17 @@ public class LoginServlet extends HttpServlet {
             info.setErrorMsg("您尚未激活，请激活！");
         }
 
+        //5.判断登录成功
+        if (u != null && "Y".equals(u.getStatus())) {
+            //登录成功
+            info.setFlag(true);
+            info.setErrorMsg("登录成功!");
+        }
+
+        //响应数据
+        ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json;charset=utf-8");
+        mapper.writeValue(response.getOutputStream(), info);
 
 
     }
