@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
             //登录成功
             info.setFlag(true);
             info.setErrorMsg("登录成功!");
+            request.getSession().setAttribute("user",u);//登录成功标记
         }
 
         //响应数据
