@@ -6,6 +6,7 @@ import cn.itcast.travel.domain.Category;
 import cn.itcast.travel.service.CategoryService;
 import cn.itcast.travel.util.JedisUtil;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Tuple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
         //1.1获取redis客户端
         Jedis jedis = JedisUtil.getJedis();
         //1/2使用redis的sortedset排序查询
-        Set<String> categorys = jedis.zrange("category", 0, -1);
+//        Set<String> categorys = jedis.zrange("category", 0, -1);
+        //1.3查询sortedset中的分数(cid)和值(cname)
+        Set<Tuple> categorys = jedis.zrangeWithScores("category", 0, -1);
 
         List<Category> cs = null;
         //2.判断查询的集合是否为空
@@ -35,9 +38,10 @@ public class CategoryServiceImpl implements CategoryService {
             System.out.println("从redis中查询...");
             //不为空，需要将redis中的set数据存入到list当中并返回（将set数据转为list数据）
             cs = new ArrayList<Category>();
-            for (String name : categorys) {
+            for (Tuple tuple : categorys) {
                 Category category = new Category();
-                category.setCname(name);
+                category.setCname(tuple.getElement());
+                category.setCid((int)tuple.getScore());
                 cs.add(category);
             }
 
