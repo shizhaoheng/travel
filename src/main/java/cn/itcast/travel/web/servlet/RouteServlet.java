@@ -34,13 +34,15 @@ public class RouteServlet extends BaseServlet {
         String cidStr = request.getParameter("cid");
 
         //接受线路名称
-        String rname = request.getParameter("rname");
+        String rnameStr = request.getParameter("rname");
 
-//        if (rname != null && rname.length() > 0 && !"null".equals(rname)) {
-//            rname = new String(rname.getBytes("iso-8859-1"), "utf-8");
-//
-//        }
-        rname = new String(rname.getBytes("iso-8859-1"), "utf-8");
+
+        String rname = null;//搜索内容
+        if (rnameStr != null && rnameStr.length() > 0 && !"null".equals(rnameStr)) {
+            rname = new String(rnameStr.getBytes("iso-8859-1"), "utf-8");
+
+        }
+//        rname = new String(rname.getBytes("iso-8859-1"), "utf-8");
 
 
         //2.处理参数
