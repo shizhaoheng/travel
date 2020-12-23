@@ -130,6 +130,14 @@ public class RouteServlet extends BaseServlet {
         writeValue(flag, response);
     }
 
+
+    /**
+     * 添加收藏
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     public void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //1.获取线路rid
