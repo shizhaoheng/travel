@@ -1,4 +1,4 @@
-package cn.itcast.travel;
+package cn.itcast.travel.dao;
 
 import cn.itcast.travel.domain.Seller;
 

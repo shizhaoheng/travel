@@ -17,9 +17,9 @@ public class FavoriteDaoImpl implements FavoriteDao {
         Favorite favorite = null;
         try {
             String sql = "select * from tab_favorite where rid = ? and uid = ?";
-            favorite = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Favorite>(Favorite.class));
+            favorite = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Favorite>(Favorite.class),rid,uid);
         } catch (DataAccessException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return favorite;
     }

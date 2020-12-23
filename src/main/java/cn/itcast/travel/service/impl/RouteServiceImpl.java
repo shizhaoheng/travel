@@ -1,6 +1,6 @@
 package cn.itcast.travel.service.impl;
 
-import cn.itcast.travel.SellerDao;
+import cn.itcast.travel.dao.SellerDao;
 import cn.itcast.travel.dao.FavoriteDao;
 import cn.itcast.travel.dao.RouteDao;
 import cn.itcast.travel.dao.RouteImgDao;
