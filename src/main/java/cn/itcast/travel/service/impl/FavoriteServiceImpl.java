@@ -12,4 +12,9 @@ public class FavoriteServiceImpl implements FavoriteService{
         Favorite favorite = favoriteDao.findByRidAndUid(Integer.parseInt(rid), uid);
         return favorite != null;  //如果对象有值则为true，反之为false
     }
+
+    @Override
+    public void add(String rid, int uid) {
+        favoriteDao.add(Integer.parseInt(rid),uid);
+    }
 }

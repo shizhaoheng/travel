@@ -8,4 +8,11 @@ public interface FavoriteService {
      * @return
      */
     public boolean isFavorite(String rid,int uid);
+
+    /**
+     * 添加收藏
+     * @param rid
+     * @param uid
+     */
+    public void add(String rid, int uid);
 }
